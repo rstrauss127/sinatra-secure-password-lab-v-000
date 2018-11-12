@@ -32,7 +32,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/login" do
-    redirect '/account'
+    ##your code here
   end
 
   get "/failure" do
