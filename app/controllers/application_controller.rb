@@ -19,8 +19,12 @@ class ApplicationController < Sinatra::Base
   post "/signup" do
     if params["password"] == "" || params["username"] == ""
       redirect '/failure'
+    end
+    user = User.new(:username => params["username"], :password => params["password"])
+    if user.save
+      redirect '/account'
     else
-      redirect '/login'
+      redirect '/failure'
     end
   end
 
@@ -38,12 +42,7 @@ class ApplicationController < Sinatra::Base
     if params["username"] == "" || params["password"] == ""
       redirect '/failure'
     end
-    user = User.new(:username => params["username"], :password => params["password"])
-    if user.save
-      redirect '/account'
-    else
-      redirect '/failure'
-    end
+
   end
 
   get "/failure" do
